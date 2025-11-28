@@ -2,12 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "@popperjs/core";
-import "bootstrap";
-
-// Import Bootstrap JavaScript
-import { Popover } from "bootstrap"
-import * as bootstrap from "bootstrap"
-
-// Make Bootstrap available globally
-window.bootstrap = bootstrap
+// Import Bootstrap
+import "@popperjs/core"
+import "bootstrap"
