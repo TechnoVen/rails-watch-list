@@ -2,6 +2,9 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+import "@popperjs/core";
+import "bootstrap";
+
 // Import Bootstrap JavaScript
 import { Popover } from "bootstrap"
 import * as bootstrap from "bootstrap"
