@@ -1,18 +1,25 @@
 class Movie < ApplicationRecord
-    has_many :bookmarks, dependent: :restrict_with_error
-    has_many :lists, through: :bookmarks
+  has_many :bookmarks
+  has_many :lists, through: :bookmarks
 
-    validates :title, presence: true, uniqueness: true
-    validates :overview, presence: true
+  validates :title, presence: true, uniqueness: true
+  validates :overview, presence: true
 
-    before_destroy :check_for_bookmarks
+  def destroy
+    check_bookmarks_before_destruction
+    super
+  end
 
-    private
+  def delete
+    check_bookmarks_before_destruction
+    super
+  end
 
-    def check_for_bookmarks
-        if bookmarks.any?
-        errors.add(:base, "Cannot delete movie with bookmarks")
-        throw :abort
-        end
+  private
+
+  def check_bookmarks_before_destruction
+    if bookmarks.any?
+      raise ActiveRecord::InvalidForeignKey, "Cannot delete movie with bookmarks"
     end
+  end
 end
